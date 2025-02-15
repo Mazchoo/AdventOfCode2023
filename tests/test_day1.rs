@@ -9,7 +9,7 @@ fn test_create_pattern_object_example_file() {
 
     let payload: String = fs::read_to_string(path).expect("Unable to read text file");
 
-    let result = day1::sum_calibration_values(&payload);
+    let result: i32 = day1::sum_calibration_values(&payload);
 
     assert_eq!(result, 142);
 }
