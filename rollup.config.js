@@ -31,7 +31,7 @@ const createPipelineCopyToDist = (sources) => {
   console.log(copyOperations);
 
   return {
-    input: './src/script/empty.js',  // Dummy file
+    input: './src/script/empty.js', // Dummy file
     plugins: [
       copy({
         targets: copyOperations,
