@@ -1,11 +1,11 @@
 use wasm_bindgen::prelude::*;
-use web_sys::console;
+use modules::utils::logging::log;
 
 pub mod modules;
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
-    console::log_1(&format!("Hello to the console {}", name).into());
+    log(&format!("Hello to the console {}", name));
 }
 
 #[wasm_bindgen]

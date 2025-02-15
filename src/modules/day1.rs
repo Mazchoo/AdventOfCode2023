@@ -1,20 +1,5 @@
 // Find the sum of first and last digits in each string
-#[cfg(target_arch = "wasm32")]
-use web_sys::console;
-#[cfg(target_arch = "wasm32")]
-use wasm_bindgen::JsValue;
-use std::collections::HashMap;
-use once_cell::sync::Lazy;
-
-#[cfg(target_arch = "wasm32")]
-pub fn log(payload: &str) {
-    console::log_1(&JsValue::from_str(payload));
-}
-
-#[cfg(not(target_arch = "wasm32"))]
-pub fn log(payload: &str) {
-    println!("{}", payload);
-}
+use crate::modules::structs::character_trie::{TRIE, CharacterTrieNode};
 
 const BYTE_OFFSET: i32 = b'0' as i32;
 
@@ -53,77 +38,6 @@ pub fn sum_calibration_values(payload: &str) -> i32 {
     return total;
 }
 
-
-fn map_word_to_value(word: &str) -> char {
-    if word == "one" {
-        return '1';
-    } else if word == "two" {
-        return '2';
-    } else if word == "three" {
-        return '3';
-    } else if word == "four" {
-        return '4';
-    } else if word == "five" {
-        return '5';
-    } else if word == "six" {
-        return '6';
-    } else if word == "seven" {
-        return '7';
-    } else if word == "eight" {
-        return '8';
-    } else if word == "nine" {
-        return '9';
-    } else {
-        return '0';
-    }
-}
-
-
-#[derive(Debug, Default)]
-struct CharacterTrieNode {
-    children: HashMap<char, CharacterTrieNode>,
-    value: char,
-}
-
-impl CharacterTrieNode {
-    fn new() -> Self {
-        CharacterTrieNode {
-            children: HashMap::new(),
-            value: '0',
-        }
-    }
-
-    fn insert(&mut self, word: &str) {
-        let mut current = self;
-        for ch in word.chars() {
-            current = current.children.entry(ch).or_insert_with(CharacterTrieNode::new);
-        }
-        current.value = map_word_to_value(word);
-    }
-
-    fn update_char(&self, ch: &char) -> Option<&CharacterTrieNode> {
-        match self.children.get(&ch) {
-            Some(child) => return Some(child),
-            None => return Option::None,
-        }
-    }
-}
-
-// Use a trie, popularised by Edward Fredkin
-// Using just the first two chracters would have been a more C like solution
-// Use lazy static intialization to create immutable static at runtime
-static TRIE: Lazy<CharacterTrieNode> = Lazy::new(|| {
-    const WORDS: [&str; 9] = [
-        "one", "two", "three", "four", "five",
-        "six", "seven", "eight", "nine"
-    ];
-
-    let mut trie = CharacterTrieNode::new();
-    for word in WORDS.iter() {
-        trie.insert(word);
-    }
-    return trie;
-});
 
 pub fn sum_calibration_letters(payload: &str) -> i32 {
     let mut total: i32 = 0;
