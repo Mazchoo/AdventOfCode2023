@@ -6,8 +6,8 @@
     "type": "module",
     "scripts": {
         "build": "rollup -c",
-        "prettier-write": "prettier . --config ./.prettierrc.json --write",
-        "server-release": "rollup -c && servez --port=23523 .",
+        "prettier": "prettier . --config ./.prettierrc.json --write",
+        "server": "servez --port=23523 dist",
         "build-rust": "wasm-pack build --target web",
         "format-rust": "cargo fmt -v",
         "test-rust": "cargo test"
