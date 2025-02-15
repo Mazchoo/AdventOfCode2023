@@ -41,7 +41,7 @@ const createPipelineCopyToDist = (sources) => {
 };
 
 export default [
-  createPipelineCopyToDist(['pkg/advent_code_wasm_bg.wasm', 'src/html/', 'src/images/']),
+  createPipelineCopyToDist(['pkg/advent_code_wasm_bg.wasm', 'src/html/', 'src/images/', 'src/index.html']),
   createJSpipeline('./src/script/main.ts', './dist/bundle.js'),
   createJSpipeline('./src/script/day1.ts', './dist/day1.js'),
 ];
