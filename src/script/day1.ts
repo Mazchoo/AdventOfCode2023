@@ -3,11 +3,12 @@ import init, { greet, get_calibration_value, get_calibration_letters } from '../
 await init();
 greet('Welcome to Day One');
 
-const textInput1 = document.getElementById('textInput1');
+const textInput = document.getElementById('textInput');
 const partOutput1 = document.getElementById('outputPart1');
+const partOutput2 = document.getElementById('outputPart2');
 
-if (textInput1) {
-  textInput1.addEventListener('input', (event) => {
+if (textInput) {
+  textInput.addEventListener('input', (event) => {
     if (!event.target) return;
     const payload = (event.target as HTMLTextAreaElement).value;
     if (partOutput1) {
@@ -15,13 +16,8 @@ if (textInput1) {
       partOutput1.innerHTML = `<strong>${result}</strong>`;
     }
   });
-}
 
-const textInput2 = document.getElementById('textInput2');
-const partOutput2 = document.getElementById('outputPart2');
-
-if (textInput2) {
-  textInput2.addEventListener('input', (event) => {
+  textInput.addEventListener('input', (event) => {
     if (!event.target) return;
     const payload = (event.target as HTMLTextAreaElement).value;
     if (partOutput2) {

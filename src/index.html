@@ -2,15 +2,27 @@
 <html>
   <head>
     <link rel="icon" type="image/x-icon" href="images/polar.png" />
+    <link rel="stylesheet" href="./bulma.min.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
   </head>
 
   <body>
-    <h1>Advent of Code 2023</h1>
-    <p>Hello there</p>
-    <a href="html/day1.html">Day 1</a>
-
+    <div class="container">
+      <article class="message">
+        <div class="message-header">
+          <div class="box">
+            <h1 class="title is-1">Advent of Code 2023</h1>
+          </div>
+        </div>
+        <div class="message-body">
+          <div class="notification">
+            <p>Advent of code 2023 sovled using Rust Wasm to compute the answers in the browser.</p>
+          </div>
+          <button class="button"><a href="html/day1.html">Day 1 - Finding first and last digit</a></button>
+        </div>
+      </article>
+    </div>
     <script defer src="./bundle.js" type="module"></script>
   </body>
 </html>

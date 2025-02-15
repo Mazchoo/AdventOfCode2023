@@ -30,9 +30,7 @@
   },
   "homepage": "https://github.com/Mazchoo/AdventOfCode2023#readme",
   "dependencies": {
-    "showdown": "^2.1.0"
-  },
-  "devDependencies": {
+    "showdown": "^2.1.0",
     "@babel/runtime": "^7.24.7",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
@@ -47,5 +45,6 @@
     "servez": "^2.1.6",
     "tslib": "^2.6.3",
     "typescript": "^5.6.3"
-  }
+  },
+  "devDependencies": {}
 }
