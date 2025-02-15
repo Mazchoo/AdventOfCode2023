@@ -11,5 +11,5 @@ fn test_create_pattern_object_example_file() {
 
     let result = day1::sum_calibration_values(&payload);
 
-    assert_eq!(result, 0);
+    assert_eq!(result, 142);
 }
