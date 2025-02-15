@@ -3,10 +3,21 @@ use crate::modules::structs::character_trie::{TRIE, CharacterTrieNode};
 
 const BYTE_OFFSET: i32 = b'0' as i32;
 
-fn get_digit_contribution(c1: char, c2: char) -> i32 {
+/// Convert two chars into a two digit integer
+/// ```
+/// let result = crate::advent_code_wasm::modules::day1::get_digit_contribution('2', '3');
+/// assert_eq!(result, 23);
+/// ```
+pub fn get_digit_contribution(c1: char, c2: char) -> i32 {
     return (c1 as i32 - BYTE_OFFSET) * 10 + (c2 as i32 - BYTE_OFFSET);
 }
 
+
+/// Find the total of the first and last digit on each line
+/// ```
+/// let result = crate::advent_code_wasm::modules::day1::sum_calibration_values("235");
+/// assert_eq!(result, 25);
+/// ```
 pub fn sum_calibration_values(payload: &str) -> i32 {
     let mut total: i32 = 0;
 
@@ -39,6 +50,12 @@ pub fn sum_calibration_values(payload: &str) -> i32 {
 }
 
 
+
+/// Find the total of the first and last digit on each line, including words
+/// ```
+/// let result = crate::advent_code_wasm::modules::day1::sum_calibration_letters("2four\nzone2");
+/// assert_eq!(result, 36);
+/// ```
 pub fn sum_calibration_letters(payload: &str) -> i32 {
     let mut total: i32 = 0;
 
