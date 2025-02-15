@@ -53,8 +53,8 @@ pub fn sum_calibration_values(payload: &str) -> i32 {
 
 /// Find the total of the first and last digit on each line, including words
 /// ```
-/// let result = crate::advent_code_wasm::modules::day1::sum_calibration_letters("2four\nzone2");
-/// assert_eq!(result, 36);
+/// let result = crate::advent_code_wasm::modules::day1::sum_calibration_letters("eightwo");
+/// assert_eq!(result, 82);
 /// ```
 pub fn sum_calibration_letters(payload: &str) -> i32 {
     let mut total: i32 = 0;
@@ -96,6 +96,11 @@ pub fn sum_calibration_letters(payload: &str) -> i32 {
                             last_number = updated_solution.value;
                         }
                         current_solutions.clear();
+
+                        if let Some(new_solution) = trie.update_char(&c) {
+                            current_solutions.push(new_solution);
+                        }
+
                         continue 'characters;
                     } else {
                         current_solutions.push(updated_solution);

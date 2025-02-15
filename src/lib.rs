@@ -12,3 +12,8 @@ pub fn greet(name: &str) {
 pub fn get_calibration_value(payload: &str) -> i32 {
     return modules::day1::sum_calibration_values(payload);
 }
+
+#[wasm_bindgen]
+pub fn get_calibration_letters(payload: &str) -> i32 {
+    return modules::day1::sum_calibration_letters(payload);
+}

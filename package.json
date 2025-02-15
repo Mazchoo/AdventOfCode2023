@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
+    "build-js": "rollup -c",
     "prettier": "prettier . --config ./.prettierrc.json --write",
     "server": "servez --port=23523 dist",
     "build-rust": "wasm-pack build --target web",
