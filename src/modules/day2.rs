@@ -6,8 +6,8 @@ struct RGB {
 
 static CUBE_CONFIG: RGB = RGB {
     red: 12,
-    blue: 13,
-    green: 14,
+    green: 13,
+    blue: 14,
 };
 
 static GREEN: &[u8] = "green".as_bytes();
