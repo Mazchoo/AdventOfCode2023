@@ -1,3 +1,4 @@
 pub mod day1;
-pub mod utils;
+pub mod day2;
 pub mod structs;
+pub mod utils;

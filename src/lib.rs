@@ -1,5 +1,5 @@
-use wasm_bindgen::prelude::*;
 use modules::utils::logging::log;
+use wasm_bindgen::prelude::*;
 
 pub mod modules;
 
@@ -16,4 +16,9 @@ pub fn get_calibration_value(payload: &str) -> i32 {
 #[wasm_bindgen]
 pub fn get_calibration_letters(payload: &str) -> i32 {
     return modules::day1::sum_calibration_letters(payload);
+}
+
+#[wasm_bindgen]
+pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
+    return modules::day2::get_sum_valid_cube_configs(payload);
 }

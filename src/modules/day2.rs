@@ -1,0 +1,100 @@
+struct RGB {
+    red: i32,
+    blue: i32,
+    green: i32,
+}
+
+static CUBE_CONFIG: RGB = RGB {
+    red: 12,
+    blue: 13,
+    green: 14,
+};
+
+static GREEN: &[u8] = "green".as_bytes();
+static BLUE: &[u8] = "blue".as_bytes();
+static RED: &[u8] = "red".as_bytes();
+static GAME: &[u8] = "Game ".as_bytes();
+const BYTE_NUMBER_OFFSET: u8 = b'0';
+const NEW_LINE: u8 = b'\n';
+
+fn parse_number_from_stream(slice: &[u8]) -> (i32, usize) {
+    let mut offset: usize = 0;
+    let mut total: i32 = 0;
+    while let Some(b) = slice.get(offset) {
+        if !b.is_ascii_digit() {
+            break;
+        }
+        let digit = (b - BYTE_NUMBER_OFFSET) as i32;
+        total *= 10;
+        total += digit;
+        offset += 1;
+    }
+    return (total, offset);
+}
+
+fn increment_slice(slice: &[u8], offset: usize) -> &[u8] {
+    return &slice.get(offset..).unwrap_or(&[]);
+}
+
+/// Sum up indices of lines which have color numbers greater than limits
+/// ```
+/// let result = crate::advent_code_wasm::modules::day2::get_sum_valid_cube_configs("Game 1: 13 red\nGame 2: 1 blue");
+/// assert_eq!(result, 2);
+/// ```
+pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
+    let mut new_line_ended: bool = true;
+    let mut output: i32 = 0;
+    let mut line_valid: bool = true;
+    let mut slice: &[u8] = payload.as_bytes();
+    let mut current_game: i32 = 1;
+    let mut current_number: i32 = 0;
+
+    while !slice.is_empty() {
+        if matches!(slice[0], b' ' | b',' | b';' | b':') {
+            slice = increment_slice(slice, 1);
+        } else if slice[0].is_ascii_digit() {
+            let offset: usize;
+            (current_number, offset) = parse_number_from_stream(slice);
+            slice = increment_slice(slice, offset + 1);
+        } else if slice.starts_with(GAME) {
+            new_line_ended = false;
+            slice = increment_slice(slice, GAME.len());
+            while slice[0].is_ascii_digit() {
+                slice = increment_slice(slice, 1);
+            }
+        } else if slice.starts_with(RED) {
+            if current_number > CUBE_CONFIG.red {
+                line_valid = false;
+            }
+            slice = increment_slice(slice, RED.len());
+        } else if slice.starts_with(GREEN) {
+            if current_number > CUBE_CONFIG.green {
+                line_valid = false;
+            }
+            slice = increment_slice(slice, GREEN.len());
+        } else if slice.starts_with(BLUE) {
+            if current_number > CUBE_CONFIG.blue {
+                line_valid = false;
+            }
+            slice = increment_slice(slice, BLUE.len());
+        } else if slice[0] == NEW_LINE {
+            if line_valid {
+                output += current_game;
+            }
+            new_line_ended = true;
+            current_game += 1;
+            line_valid = true;
+            slice = increment_slice(slice, 1);
+        } else {
+            slice = increment_slice(slice, 1);
+        }
+    }
+
+    if !new_line_ended {
+        if line_valid {
+            output += current_game;
+        }
+    }
+
+    return output;
+}

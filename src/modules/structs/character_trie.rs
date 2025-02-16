@@ -1,7 +1,6 @@
 // Static trie to help search for a word in a string
-use std::collections::HashMap;
 use once_cell::sync::Lazy;
-
+use std::collections::HashMap;
 
 fn map_word_to_value(word: &str) -> char {
     if word == "one" {
@@ -27,7 +26,6 @@ fn map_word_to_value(word: &str) -> char {
     }
 }
 
-
 #[derive(Debug, Default)]
 pub struct CharacterTrieNode {
     pub children: HashMap<char, CharacterTrieNode>,
@@ -45,7 +43,10 @@ impl CharacterTrieNode {
     fn insert(&mut self, word: &str) {
         let mut current = self;
         for ch in word.chars() {
-            current = current.children.entry(ch).or_insert_with(CharacterTrieNode::new);
+            current = current
+                .children
+                .entry(ch)
+                .or_insert_with(CharacterTrieNode::new);
         }
         current.value = map_word_to_value(word);
     }
@@ -63,8 +64,7 @@ impl CharacterTrieNode {
 // Use lazy static intialization to create immutable static at runtime
 pub static TRIE: Lazy<CharacterTrieNode> = Lazy::new(|| {
     const WORDS: [&str; 9] = [
-        "one", "two", "three", "four", "five",
-        "six", "seven", "eight", "nine"
+        "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
     ];
 
     let mut trie = CharacterTrieNode::new();

@@ -1,5 +1,5 @@
 // Find the sum of first and last digits in each string
-use crate::modules::structs::character_trie::{TRIE, CharacterTrieNode};
+use crate::modules::structs::character_trie::{CharacterTrieNode, TRIE};
 
 const BYTE_OFFSET: i32 = b'0' as i32;
 
@@ -11,7 +11,6 @@ const BYTE_OFFSET: i32 = b'0' as i32;
 pub fn get_digit_contribution(c1: char, c2: char) -> i32 {
     return (c1 as i32 - BYTE_OFFSET) * 10 + (c2 as i32 - BYTE_OFFSET);
 }
-
 
 /// Find the total of the first and last digit on each line
 /// ```
@@ -48,8 +47,6 @@ pub fn sum_calibration_values(payload: &str) -> i32 {
 
     return total;
 }
-
-
 
 /// Find the total of the first and last digit on each line, including words
 /// ```
