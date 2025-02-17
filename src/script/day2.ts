@@ -1,4 +1,4 @@
-import init, { greet, get_sum_valid_cube_configs } from '../../pkg/advent_code_wasm.js';
+import init, { greet, get_sum_valid_cube_configs, get_mininmum_product_each_game } from '../../pkg/advent_code_wasm.js';
 
 await init();
 greet('Welcome to Day Two');
@@ -21,7 +21,7 @@ if (textInput) {
     if (!event.target) return;
     const payload = (event.target as HTMLTextAreaElement).value;
     if (partOutput2) {
-      const result = 0;
+      const result = get_mininmum_product_each_game(payload);
       partOutput2.innerHTML = `<strong>${result}</strong>`;
     }
   });

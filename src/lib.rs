@@ -22,3 +22,8 @@ pub fn get_calibration_letters(payload: &str) -> i32 {
 pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
     return modules::day2::get_sum_valid_cube_configs(payload);
 }
+
+#[wasm_bindgen]
+pub fn get_mininmum_product_each_game(payload: &str) -> i32 {
+    return modules::day2::get_mininmum_product_each_game(payload);
+}
