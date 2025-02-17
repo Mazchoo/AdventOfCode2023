@@ -1,3 +1,7 @@
+// Cobinations of cubes
+use crate::modules::utils::streaming::{increment_slice, parse_number_from_stream};
+
+
 struct RGB {
     red: i32,
     blue: i32,
@@ -14,27 +18,7 @@ static GREEN: &[u8] = "green".as_bytes();
 static BLUE: &[u8] = "blue".as_bytes();
 static RED: &[u8] = "red".as_bytes();
 static GAME: &[u8] = "Game ".as_bytes();
-const BYTE_NUMBER_OFFSET: u8 = b'0';
 const NEW_LINE: u8 = b'\n';
-
-fn increment_slice(slice: &[u8], offset: usize) -> &[u8] {
-    return &slice.get(offset..).unwrap_or(&[]);
-}
-
-fn parse_number_from_stream(slice: &[u8]) -> (i32, &[u8]) {
-    let mut total: i32 = 0;
-    let mut output = slice;
-    while let Some(b) = output.get(0) {
-        if !b.is_ascii_digit() {
-            break;
-        }
-        let digit = (b - BYTE_NUMBER_OFFSET) as i32;
-        total *= 10;
-        total += digit;
-        output = increment_slice(output, 1);
-    }
-    return (total, output);
-}
 
 /// Sum up indices of lines which have color numbers greater than limits
 /// ```
