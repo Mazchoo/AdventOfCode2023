@@ -17,23 +17,23 @@ static GAME: &[u8] = "Game ".as_bytes();
 const BYTE_NUMBER_OFFSET: u8 = b'0';
 const NEW_LINE: u8 = b'\n';
 
-fn parse_number_from_stream(slice: &[u8]) -> (i32, usize) {
-    let mut offset: usize = 0;
+fn increment_slice(slice: &[u8], offset: usize) -> &[u8] {
+    return &slice.get(offset..).unwrap_or(&[]);
+}
+
+fn parse_number_from_stream(slice: &[u8]) -> (i32, &[u8]) {
     let mut total: i32 = 0;
-    while let Some(b) = slice.get(offset) {
+    let mut output = slice;
+    while let Some(b) = output.get(0) {
         if !b.is_ascii_digit() {
             break;
         }
         let digit = (b - BYTE_NUMBER_OFFSET) as i32;
         total *= 10;
         total += digit;
-        offset += 1;
+        output = increment_slice(output, 1);
     }
-    return (total, offset);
-}
-
-fn increment_slice(slice: &[u8], offset: usize) -> &[u8] {
-    return &slice.get(offset..).unwrap_or(&[]);
+    return (total, output);
 }
 
 /// Sum up indices of lines which have color numbers greater than limits
@@ -53,9 +53,7 @@ pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
         if matches!(slice[0], b' ' | b',' | b';' | b':') {
             slice = increment_slice(slice, 1);
         } else if slice[0].is_ascii_digit() {
-            let offset: usize;
-            (current_number, offset) = parse_number_from_stream(slice);
-            slice = increment_slice(slice, offset + 1);
+            (current_number, slice) = parse_number_from_stream(slice);
         } else if slice.starts_with(GAME) {
             new_line_ended = false;
             slice = increment_slice(slice, GAME.len());
