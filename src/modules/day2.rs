@@ -3,8 +3,8 @@ use crate::modules::utils::streaming::{increment_slice, parse_number_from_stream
 
 struct RGB {
     red: i32,
-    blue: i32,
     green: i32,
+    blue: i32,
 }
 
 static CUBE_CONFIG: RGB = RGB {

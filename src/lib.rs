@@ -27,3 +27,8 @@ pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
 pub fn get_mininmum_product_each_game(payload: &str) -> i32 {
     return modules::day2::get_mininmum_product_each_game(payload);
 }
+
+#[wasm_bindgen]
+pub fn get_sum_touching_numbers(payload: &str) -> i32 {
+    return modules::day3::get_sum_touching_numbers(payload);
+}
