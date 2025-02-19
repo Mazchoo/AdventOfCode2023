@@ -15,11 +15,7 @@ if (textInput) {
       const result = get_calibration_value(payload);
       partOutput1.innerHTML = `<strong>${result}</strong>`;
     }
-  });
 
-  textInput.addEventListener('input', (event) => {
-    if (!event.target) return;
-    const payload = (event.target as HTMLTextAreaElement).value;
     if (partOutput2) {
       const result = get_calibration_letters(payload);
       partOutput2.innerHTML = `<strong>${result}</strong>`;

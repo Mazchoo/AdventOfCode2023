@@ -6,7 +6,6 @@ use advent_code_wasm::modules::day3;
 #[test]
 fn test_sample_input_1() {
     let path = Path::new("tests/example_input/day3_example.txt");
-
     let payload: String = fs::read_to_string(path).expect("Unable to read text file");
 
     let result: i32 = day3::get_sum_touching_numbers(&payload);
@@ -28,7 +27,6 @@ fn test_empty_part_1() {
     assert_eq!(result, 0);
 }
 
-
 #[test]
 fn test_no_pitch_part_1() {
     let payload: &str = "\n\n\n\n";
@@ -36,3 +34,12 @@ fn test_no_pitch_part_1() {
     assert_eq!(result, 0);
 }
 
+#[test]
+fn test_sample_input_2() {
+    let path = Path::new("tests/example_input/day3_example.txt");
+    let payload: String = fs::read_to_string(path).expect("Unable to read text file");
+
+    let result: i32 = day3::get_gear_multiplication(&payload);
+
+    assert_eq!(result, 467835);
+}

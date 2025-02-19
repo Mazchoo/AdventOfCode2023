@@ -32,3 +32,8 @@ pub fn get_mininmum_product_each_game(payload: &str) -> i32 {
 pub fn get_sum_touching_numbers(payload: &str) -> i32 {
     return modules::day3::get_sum_touching_numbers(payload);
 }
+
+#[wasm_bindgen]
+pub fn get_gear_multiplication(payload: &str) -> i32 {
+    return modules::day3::get_gear_multiplication(payload);
+}

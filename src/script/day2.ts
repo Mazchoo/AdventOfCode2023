@@ -15,11 +15,7 @@ if (textInput) {
       const result = get_sum_valid_cube_configs(payload);
       partOutput1.innerHTML = `<strong>${result}</strong>`;
     }
-  });
 
-  textInput.addEventListener('input', (event) => {
-    if (!event.target) return;
-    const payload = (event.target as HTMLTextAreaElement).value;
     if (partOutput2) {
       const result = get_mininmum_product_each_game(payload);
       partOutput2.innerHTML = `<strong>${result}</strong>`;
