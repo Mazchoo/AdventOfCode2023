@@ -173,7 +173,7 @@ pub fn get_gear_multiplication(payload: &str) -> i32 {
         return 0; // expect row length > 1
     }
 
-    // Hash maps are bad in wasm context
+    // Dynamic growth should be approached with caution in wasm
     let mut id_value_mapping: Vec<i32> = Vec::with_capacity(1000);
     id_value_mapping.push(0); // id 0 is nothing
     let mut current_id: i32 = 0;
