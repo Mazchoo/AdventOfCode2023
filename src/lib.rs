@@ -37,3 +37,13 @@ pub fn get_sum_touching_numbers(payload: &str) -> i32 {
 pub fn get_gear_multiplication(payload: &str) -> i32 {
     return modules::day3::get_gear_multiplication(payload);
 }
+
+#[wasm_bindgen]
+pub fn sum_scratch_card_values(payload: &str) -> u32 {
+    return modules::day4::sum_scratch_card_values::<10>(payload);
+}
+
+#[wasm_bindgen]
+pub fn sum_scratch_194_cards_recursive(payload: &str) -> u32 {
+    return modules::day4::sum_recursive_scratch_cards::<10, 194>(payload);
+}
