@@ -71,7 +71,7 @@ pub fn sum_scratch_card_values<const N: usize>(payload: &str) -> u32 {
 /// Sum number o
 /// ```
 /// let result = crate::advent_code_wasm::modules::day4::sum_recursive_scratch_cards::<2, 3>("1 3 | 3 \n 1 2 | 1 2 \n 1 | 1 1");
-/// assert_eq!(result, 8);
+/// assert_eq!(result, 6);
 /// ```
 pub fn sum_recursive_scratch_cards<const N: usize, const M: usize>(payload: &str) -> u32 {
     let mut winning_ind: usize = 0;

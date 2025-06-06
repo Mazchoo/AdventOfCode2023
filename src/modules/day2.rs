@@ -1,5 +1,5 @@
 // Cobinations of cubes
-use crate::modules::utils::streaming::{increment_slice, parse_number_from_stream};
+use crate::modules::utils::streaming::{increment_slice, parse_number_from_stream_i32};
 
 struct RGB {
     red: i32,
@@ -36,7 +36,7 @@ pub fn get_sum_valid_cube_configs(payload: &str) -> i32 {
         if matches!(slice[0], b' ' | b',' | b';' | b':') {
             slice = increment_slice(slice, 1);
         } else if slice[0].is_ascii_digit() {
-            (current_number, slice) = parse_number_from_stream(slice);
+            (current_number, slice) = parse_number_from_stream_i32(slice);
         } else if slice.starts_with(GAME) {
             new_line_ended = false;
             slice = increment_slice(slice, GAME.len());
@@ -99,7 +99,7 @@ pub fn get_mininmum_product_each_game(payload: &str) -> i32 {
         if matches!(slice[0], b' ' | b',' | b';' | b':') {
             slice = increment_slice(slice, 1);
         } else if slice[0].is_ascii_digit() {
-            (current_number, slice) = parse_number_from_stream(slice);
+            (current_number, slice) = parse_number_from_stream_i32(slice);
         } else if slice.starts_with(GAME) {
             new_line_ended = false;
             slice = increment_slice(slice, GAME.len());

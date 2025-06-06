@@ -9,12 +9,12 @@ pub fn increment_slice(slice: &[u8], offset: usize) -> &[u8] {
     return &slice.get(offset..).unwrap_or(&[]);
 }
 
-/// Increment reference to some bytes by a certain amount or return empty bytes
+/// Increment reference to some bytes by a certain amount or return empty bytes for i32
 /// ```
-/// let result = crate::advent_code_wasm::modules::utils::streaming::parse_number_from_stream(&"12c".as_bytes());
+/// let result = crate::advent_code_wasm::modules::utils::streaming::parse_number_from_stream_i32(&"12c".as_bytes());
 /// assert_eq!(result, (12, "c".as_bytes()));
 /// ```
-pub fn parse_number_from_stream(slice: &[u8]) -> (i32, &[u8]) {
+pub fn parse_number_from_stream_i32(slice: &[u8]) -> (i32, &[u8]) {
     let mut total: i32 = 0;
     let mut output = slice;
     while let Some(b) = output.get(0) {
@@ -22,6 +22,26 @@ pub fn parse_number_from_stream(slice: &[u8]) -> (i32, &[u8]) {
             break;
         }
         let digit = (b - BYTE_NUMBER_OFFSET) as i32;
+        total *= 10;
+        total += digit;
+        output = increment_slice(output, 1);
+    }
+    return (total, output);
+}
+
+/// Increment reference to some bytes by a certain amount or return empty bytes for i64
+/// ```
+/// let result = crate::advent_code_wasm::modules::utils::streaming::parse_number_from_stream_i64(&"12c".as_bytes());
+/// assert_eq!(result, (12, "c".as_bytes()));
+/// ```
+pub fn parse_number_from_stream_i64(slice: &[u8]) -> (i64, &[u8]) {
+    let mut total: i64 = 0;
+    let mut output = slice;
+    while let Some(b) = output.get(0) {
+        if !b.is_ascii_digit() {
+            break;
+        }
+        let digit = (b - BYTE_NUMBER_OFFSET) as i64;
         total *= 10;
         total += digit;
         output = increment_slice(output, 1);
