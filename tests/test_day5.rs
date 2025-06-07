@@ -12,3 +12,13 @@ fn test_sample_input_part1() {
 
     assert_eq!(result, 35);
 }
+
+#[test]
+fn test_sample_input_part2() {
+    let path = Path::new("tests/example_input/day5_example.txt");
+    let payload: String = fs::read_to_string(path).expect("Unable to read text file");
+
+    let result: i64 = day5::lowest_seed_range_location(&payload);
+
+    assert_eq!(result, 46);
+}

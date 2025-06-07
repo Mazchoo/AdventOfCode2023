@@ -1,4 +1,4 @@
-import init, { greet, lowest_seed_location } from '../../pkg/advent_code_wasm.js';
+import init, { greet, lowest_seed_location, lowest_seed_range_location } from '../../pkg/advent_code_wasm.js';
 
 await init();
 greet('Welcome to Day Five');
@@ -17,7 +17,7 @@ if (textInput) {
     }
 
     if (partOutput2) {
-      const result = lowest_seed_location(payload);
+      const result = lowest_seed_range_location(payload);
       partOutput2.innerHTML = `<strong>${result}</strong>`;
     }
   });

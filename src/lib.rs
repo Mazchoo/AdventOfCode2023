@@ -52,3 +52,8 @@ pub fn sum_scratch_194_cards_recursive(payload: &str) -> u32 {
 pub fn lowest_seed_location(payload: &str) -> i64 {
     return modules::day5::lowest_seed_location(payload);
 }
+
+#[wasm_bindgen]
+pub fn lowest_seed_range_location(payload: &str) -> i64 {
+    return modules::day5::lowest_seed_range_location(payload);
+}
