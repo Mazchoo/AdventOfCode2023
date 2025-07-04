@@ -1,4 +1,4 @@
-import init, { greet, boat_race_ownage } from '../../pkg/advent_code_wasm.js';
+import init, { greet, boat_race_ownage, boat_race_one_time } from '../../pkg/advent_code_wasm.js';
 
 await init();
 greet('Welcome to Day Six');
@@ -17,7 +17,7 @@ if (textInput) {
     }
 
     if (partOutput2) {
-      const result = boat_race_ownage(payload);
+      const result = boat_race_one_time(payload);
       partOutput2.innerHTML = `<strong>${result}</strong>`;
     }
   });

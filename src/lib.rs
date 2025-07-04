@@ -62,3 +62,8 @@ pub fn lowest_seed_range_location(payload: &str) -> i64 {
 pub fn boat_race_ownage(payload: &str) -> i64 {
     return modules::day6::boat_race_ownage(payload);
 }
+
+#[wasm_bindgen]
+pub fn boat_race_one_time(payload: &str) -> i64 {
+    return modules::day6::boat_race_one_time(payload);
+}
