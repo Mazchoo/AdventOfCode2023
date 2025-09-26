@@ -2,6 +2,8 @@
 use std::cmp::Ordering;
 use std::cmp::Reverse;
 
+const BYTE_OFFSET: u8 = b'0';
+
 /// Compare two cards where each card is a char 2, 3, 4, ..., T, J, Q, K, A
 /// Perform comparision where 2 < 3 ... < K < A
 /// ```
@@ -48,8 +50,8 @@ pub fn compare_cards(card1: &char, card2: &char) -> std::cmp::Ordering {
 /// let result2 = crate::advent_code_wasm::modules::day7::compare_cards_by_value(&['3', '3', '2', '2', '2'], &['3', '2', 'A', 'A', 'A']);
 /// assert_eq!(result2, Ordering::Greater);
 /// ```
-pub fn compare_cards_by_value(hand1: &[char; 5], hand_2: &[char; 5]) -> std::cmp::Ordering {
-    for (card1, card2) in hand1.iter().zip(hand_2.iter()) {
+pub fn compare_cards_by_value(hand1: &[char; 5], hand2: &[char; 5]) -> std::cmp::Ordering {
+    for (card1, card2) in hand1.iter().zip(hand2.iter()) {
         let card_compare_result: Ordering = compare_cards(card1, card2);
         if card_compare_result != Ordering::Equal {
             return card_compare_result;
@@ -129,4 +131,46 @@ pub fn compare_hands(hand1: &[char; 5], hand2: &[char; 5]) -> std::cmp::Ordering
         Ordering::Equal => compare_cards_by_value(hand1, hand2),
         Ordering::Greater => Ordering::Greater,
     };
+}
+
+/// Turn string describing hands into arrays of chars for hands and
+/// the bids read as i16 integers
+/// ```
+/// let result = crate::advent_code_wasm::modules::day7::parse_card_hands("32T3K 765");
+/// assert_eq!(result, (vec![['3', '2', 'T', '3', 'K']], vec![765i16]));
+/// ```
+pub fn parse_card_hands(payload: &str) -> (Vec<[char; 5]>, Vec<i16>) {
+    let mut hands: Vec<[char; 5]> = vec![];
+    let mut bids: Vec<i16> = vec![];
+
+    let mut reading_hand: bool = true;
+    let mut current_hand: [char; 5] = ['2', '2', '2', '2', '2'];
+    let mut current_bid: i16 = 0;
+    let mut i: usize = 0;
+    for c in payload.chars() {
+        if c == ' ' {
+            reading_hand = false;
+            hands.push(current_hand);
+        } else if c == '\n' {
+            reading_hand = true;
+            bids.push(current_bid);
+            current_bid = 0;
+            i = 0;
+        } else {
+            if reading_hand {
+                current_hand[i] = c;
+                i += 1;
+            } else {
+                let digit: i16 = (c as u8 - BYTE_OFFSET) as i16;
+                current_bid *= 10;
+                current_bid += digit;
+            }
+        }
+    }
+
+    if current_bid > 0 {
+        bids.push(current_bid);
+    }
+
+    return (hands, bids);
 }
