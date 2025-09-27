@@ -137,11 +137,10 @@ pub fn compare_hands(hand1: &[char; 5], hand2: &[char; 5]) -> std::cmp::Ordering
 /// the bids read as i16 integers
 /// ```
 /// let result = crate::advent_code_wasm::modules::day7::parse_card_hands("32T3K 765");
-/// assert_eq!(result, (vec![['3', '2', 'T', '3', 'K']], vec![765i16]));
+/// assert_eq!(result, vec![(['3', '2', 'T', '3', 'K'], 765i16)]);
 /// ```
-pub fn parse_card_hands(payload: &str) -> (Vec<[char; 5]>, Vec<i16>) {
-    let mut hands: Vec<[char; 5]> = vec![];
-    let mut bids: Vec<i16> = vec![];
+pub fn parse_card_hands(payload: &str) -> Vec<([char; 5], i16)> {
+    let mut hands_bids: Vec<([char; 5], i16)> = vec![];
 
     let mut reading_hand: bool = true;
     let mut current_hand: [char; 5] = ['2', '2', '2', '2', '2'];
@@ -150,12 +149,13 @@ pub fn parse_card_hands(payload: &str) -> (Vec<[char; 5]>, Vec<i16>) {
     for c in payload.chars() {
         if c == ' ' {
             reading_hand = false;
-            hands.push(current_hand);
         } else if c == '\n' {
             reading_hand = true;
-            bids.push(current_bid);
+            hands_bids.push((current_hand, current_bid));
             current_bid = 0;
             i = 0;
+        } else if c == '\r' {
+            continue;
         } else {
             if reading_hand {
                 current_hand[i] = c;
@@ -169,8 +169,24 @@ pub fn parse_card_hands(payload: &str) -> (Vec<[char; 5]>, Vec<i16>) {
     }
 
     if current_bid > 0 {
-        bids.push(current_bid);
+        hands_bids.push((current_hand, current_bid));
     }
 
-    return (hands, bids);
+    return hands_bids;
+}
+
+/// Returns bid multiplied by its rank
+pub fn multiply_bids_and_order(payload: &str) -> i64 {
+    let mut hands_bids: Vec<([char; 5], i16)> = parse_card_hands(payload);
+
+    hands_bids.sort_by(|a, b| compare_hands(&a.0, &b.0));
+
+    let mut output: i64 = 0;
+    let mut i: i64 = 0;
+    for hand_bid in hands_bids.iter() {
+        i += 1;
+        output += i * hand_bid.1 as i64;
+    }
+
+    return output;
 }
