@@ -55,4 +55,5 @@ export default [
   createJSpipeline('./src/script/day4.ts', './dist/day4.js'),
   createJSpipeline('./src/script/day5.ts', './dist/day5.js'),
   createJSpipeline('./src/script/day6.ts', './dist/day6.js'),
+  createJSpipeline('./src/script/profile_test.ts', './dist/profile_test.js'),
 ];

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="../images/polar.png" />
+    <link rel="stylesheet" href="../bulma.min.css" type="text/css" />
+  </head>
+  <body>
+    <h1>Rust WASM versus JIT</h1>
+    <article class="message">
+      <div class="message-header">
+        <p>Check the console</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-header">
+        <p>Python Implementation (c. 1 second each)</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        <pre><code>
+                from time import perf_counter
+
+
+                def sum_fields(o):
+                    return o["a"] + o["b"]
+
+
+                def make_a():
+                    # always the same shape
+                    return {"a": 1, "b": 2}
+
+
+                def make_b():
+                    # different shape: extra property
+                    return {"a": 1, "b": 2, "c": 3}
+
+
+                def run_warmup(make_fn, iterations=1_000_000):
+                    total = 0
+                    for _ in range(iterations):
+                        obj = make_fn()
+                        total += sum_fields(obj)
+                    return total
+
+
+                print("Phase 1: warmup with same-shaped dicts")
+                t0 = perf_counter()
+                run_warmup(make_a)
+                print("Phase 1 time:", perf_counter() - t0)
+
+                print("Phase 2: different-shaped dicts (extra key)")
+                t0 = perf_counter()
+                run_warmup(make_b)
+                print("Phase 2 time:", perf_counter() - t0)
+
+                print("Phase 3: back to original shape")
+                t0 = perf_counter()
+                run_warmup(make_a)
+                print("Phase 3 time:", perf_counter() - t0)
+            </code></pre>
+      </div>
+    </article>
+    <script defer src="../profile_test.js" type="module"></script>
+  </body>
+</html>
