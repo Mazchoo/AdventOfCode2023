@@ -2,7 +2,6 @@ use modules::utils::logging::log;
 use wasm_bindgen::prelude::*;
 
 pub mod modules;
-pub mod profile_check;
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
