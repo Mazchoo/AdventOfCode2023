@@ -67,3 +67,13 @@ pub fn boat_race_ownage(payload: &str) -> i64 {
 pub fn boat_race_one_time(payload: &str) -> i64 {
     return modules::day6::boat_race_one_time(payload);
 }
+
+#[wasm_bindgen]
+pub fn multiply_bids_and_order(payload: &str) -> i64 {
+    return modules::day7::multiply_bids_and_order::<false>(payload);
+}
+
+#[wasm_bindgen]
+pub fn multiply_wild_bids_and_order(payload: &str) -> i64 {
+    return modules::day7::multiply_bids_and_order::<true>(payload);
+}

@@ -4,6 +4,12 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import wasm from '@rollup/plugin-wasm';
 import copy from 'rollup-plugin-copy';
+import replace from '@rollup/plugin-replace';
+
+const REPLACE_PRODUCTION = replace({
+  'process.env.NODE_ENV': JSON.stringify('production'),
+  preventAssignment: true
+})
 
 const createJSpipeline = (inputPath, outputPath) => {
   return {
@@ -16,7 +22,7 @@ const createJSpipeline = (inputPath, outputPath) => {
       },
     ],
 
-    plugins: [nodeResolve(), commonjs(), wasm(), typescript({ tsconfig: './tsconfig.json' }), terser()],
+    plugins: [nodeResolve(), commonjs(), wasm(), typescript({ tsconfig: './tsconfig.json' }), terser(), REPLACE_PRODUCTION],
     watch: {
       clearScreen: false,
     },
@@ -46,14 +52,15 @@ export default [
     'src/html/',
     'src/images/',
     'src/index.html',
-    'src/bulma.min.css',
+    'src/bulma.min.css'
   ]),
-  createJSpipeline('./src/script/main.ts', './dist/bundle.js'),
-  createJSpipeline('./src/script/day1.ts', './dist/day1.js'),
-  createJSpipeline('./src/script/day2.ts', './dist/day2.js'),
-  createJSpipeline('./src/script/day3.ts', './dist/day3.js'),
-  createJSpipeline('./src/script/day4.ts', './dist/day4.js'),
-  createJSpipeline('./src/script/day5.ts', './dist/day5.js'),
-  createJSpipeline('./src/script/day6.ts', './dist/day6.js'),
-  createJSpipeline('./src/script/profile_test.ts', './dist/profile_test.js'),
+  createJSpipeline('./src/script/main.tsx', './dist/bundle.js'),
+  createJSpipeline('./src/script/day7/main.tsx', './dist/day7.js'),
+  createJSpipeline('./src/script/day6/main.tsx', './dist/day6.js'),
+  createJSpipeline('./src/script/day5/main.tsx', './dist/day5.js'),
+  createJSpipeline('./src/script/day4/main.tsx', './dist/day4.js'),
+  createJSpipeline('./src/script/day3/main.tsx', './dist/day3.js'),
+  createJSpipeline('./src/script/day2/main.tsx', './dist/day2.js'),
+  createJSpipeline('./src/script/day1/main.tsx', './dist/day1.js'),
+  createJSpipeline('./src/script/profile_test.tsx', './dist/profile_test.js'),
 ];

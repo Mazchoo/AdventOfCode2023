@@ -26,7 +26,11 @@ pub fn sum_fields(o: &Obj) -> i32 {
 pub fn run_warmup_a(iterations: i32) -> i32 {
     let mut total = 0;
     for _ in 0..iterations {
-        let obj = Obj { a: 1, b: 2, c: None }; // shape A: no "c"
+        let obj = Obj {
+            a: 1,
+            b: 2,
+            c: None,
+        }; // shape A: no "c"
         total += sum_fields(&obj);
     }
     total
@@ -36,7 +40,11 @@ pub fn run_warmup_a(iterations: i32) -> i32 {
 pub fn run_warmup_b(iterations: i32) -> i32 {
     let mut total = 0;
     for _ in 0..iterations {
-        let obj = Obj { a: 1, b: 2, c: Some(3) }; // shape B: has "c"
+        let obj = Obj {
+            a: 1,
+            b: 2,
+            c: Some(3),
+        }; // shape B: has "c"
         total += sum_fields(&obj);
     }
     total

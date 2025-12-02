@@ -7,8 +7,11 @@
     "rootDir": "./src",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
   },
-  "include": ["src/**/*.ts", "pkg"],
+  "include": ["src/**/*.tsx", "pkg"],
   "exclude": ["dist"]
 }

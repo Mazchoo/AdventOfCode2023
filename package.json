@@ -30,7 +30,6 @@
   },
   "homepage": "https://github.com/Mazchoo/AdventOfCode2023#readme",
   "dependencies": {
-    "showdown": "^2.1.0",
     "@babel/runtime": "^7.28.4",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -40,11 +39,18 @@
     "@tsconfig/recommended": "^1.0.10",
     "glob": "^11.0.3",
     "prettier": "^3.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "rollup": "^4.52.3",
     "rollup-plugin-copy": "^3.5.0",
     "servez": "^2.3.2",
     "tslib": "^2.6.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@rollup/plugin-replace": "^6.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-helmet": "^6.1.11"
   },
   "devDependencies": {}
 }
